@@ -306,6 +306,30 @@
       text-transform: uppercase;
     }
 
+    .hero-topline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(108, 99, 255, 0.16);
+      border: 1px solid rgba(140, 133, 255, 0.28);
+      color: #d8d4ff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
     .eyebrow::before {
       content: "";
       width: 8px;
@@ -557,6 +581,16 @@
         font-size: clamp(2.2rem, 11vw, 3.1rem);
       }
 
+      .hero-topline {
+        gap: 8px;
+      }
+
+      .hero-badge {
+        min-height: 32px;
+        padding: 0 12px;
+        font-size: 0.72rem;
+      }
+
       .hero-copy .lead,
       .section-head .lead,
       .support-copy p {
@@ -690,10 +724,13 @@
     <section class="section">
       <div class="container hero">
         <div class="hero-copy">
-          <div class="eyebrow">Android document workspace</div>
-          <h1>Offline first. Backup optional.</h1>
+          <div class="hero-topline">
+            <div class="eyebrow">Android document workspace</div>
+            <div class="hero-badge">Offline first</div>
+          </div>
+          <h1>Scan, organize, and protect documents.</h1>
           <p class="lead">
-            All your documents stay available offline, even without Wi-Fi. Backup and online restore stay optional and fully in your control.
+            Your files stay available offline, even without Wi-Fi. Backup and online restore stay optional and fully in your control.
           </p>
 
           <div class="hero-chips" style="margin-top: 22px;">
