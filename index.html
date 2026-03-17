@@ -1,13 +1,678 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lihenium Studio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#6c63ff" />
+  <meta
+    name="description"
+    content="Lihenium: Scan PDF & Vault brings document scanning, OCR, PDF tools, encrypted vault storage, and backup options into one Android workspace."
+  />
+  <meta property="og:title" content="Lihenium: Scan PDF & Vault | Official Website" />
+  <meta
+    property="og:description"
+    content="Scan, organize, protect, and restore documents in one calm Android app."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://liheniumapp.github.io/" />
+  <meta property="og:image" content="https://liheniumapp.github.io/assets/screen-home.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>Lihenium: Scan PDF & Vault | Official Website</title>
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050507;
+      --card: rgba(14, 15, 22, 0.9);
+      --ink: #f4f5fb;
+      --muted: #b6b4c7;
+      --brand: #6c63ff;
+      --brand-strong: #8c85ff;
+      --brand-soft: #ece8ff;
+      --teal: #19c6cb;
+      --teal-soft: #e6fbfb;
+      --gold-soft: #fff3d8;
+      --line: rgba(255, 255, 255, 0.08);
+      --shadow: 0 24px 72px rgba(0, 0, 0, 0.34);
+      --shadow-soft: 0 16px 38px rgba(0, 0, 0, 0.26);
+      --radius: 28px;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Manrope", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(108, 99, 255, 0.2), transparent 28%),
+        radial-gradient(circle at top right, rgba(25, 198, 203, 0.14), transparent 22%),
+        linear-gradient(180deg, #090910 0%, #050507 42%, #040406 100%);
+      line-height: 1.65;
+    }
+
+    img { display: block; width: 100%; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Space Grotesk", "Manrope", sans-serif;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+    p { margin: 0; }
+
+    .container {
+      width: min(var(--container), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 16px 0;
+      background: rgba(5, 5, 7, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav, .hero, .support, .footer-shell {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #171635;
+      box-shadow: 0 12px 28px rgba(58, 45, 160, 0.18);
+      flex-shrink: 0;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .brand-copy span,
+    .lead,
+    .muted {
+      color: var(--muted);
+    }
+
+    .nav-links,
+    .actions,
+    .hero-chips,
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .chip,
+    .nav-links a,
+    .pill,
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .chip, .nav-links a, .pill, .footer-links a {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 180ms ease;
+    }
+
+    .button:hover,
+    .nav-links a:hover,
+    .pill:hover {
+      transform: translateY(-2px);
+    }
+
+    .button.primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), #7d70ff 45%, #39d0d4);
+      box-shadow: 0 16px 36px rgba(86, 74, 212, 0.28);
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--line);
+    }
+
+    .section { padding: 84px 0; scroll-margin-top: 90px; }
+
+    .hero {
+      align-items: stretch;
+      padding: 28px 0 72px;
+    }
+
+    .hero-copy,
+    .hero-shot,
+    .feature-card,
+    .screen-card,
+    .support-copy,
+    .support-card,
+    .footer-shell {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      border-radius: var(--radius);
+    }
+
+    .hero-copy,
+    .hero-shot,
+    .support-copy,
+    .support-card {
+      padding: 28px;
+    }
+
+    .hero-copy {
+      flex: 1 1 540px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 191, 88, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(20, 20, 30, 0.96), rgba(12, 12, 18, 0.94));
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      color: var(--brand-strong);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--brand), var(--teal));
+      box-shadow: 0 0 0 5px rgba(108, 99, 255, 0.08);
+    }
+
+    .hero-copy h1 {
+      margin-top: 18px;
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      max-width: 12ch;
+    }
+
+    .hero-copy .lead {
+      margin-top: 18px;
+      max-width: 58ch;
+      font-size: clamp(1rem, 1.4vw, 1.14rem);
+    }
+
+    .actions { margin-top: 26px; }
+
+    .hero-notes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .note {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
+    .hero-shot {
+      flex: 1 1 360px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .phone {
+      padding: 12px;
+      border-radius: 30px;
+      background: linear-gradient(180deg, rgba(22, 24, 34, 0.96), rgba(12, 13, 19, 0.92));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .phone img { border-radius: 22px; }
+
+    .mini-grid,
+    .feature-grid,
+    .screen-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mini-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .screen-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .mini-card,
+    .feature-card,
+    .screen-card {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+    }
+
+    .mini-card strong,
+    .feature-card strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .mini-card span,
+    .feature-card p,
+    .screen-card p,
+    .support-copy p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-top: 8px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      margin-top: 16px;
+    }
+
+    .feature-card .pill:nth-child(1),
+    .screen-card .pill:nth-child(1) {
+      margin-bottom: 14px;
+    }
+
+    .feature-card.alt-teal .pill,
+    .screen-card.alt-teal .pill {
+      background: var(--teal-soft);
+      color: #12272a;
+      border-color: rgba(25, 198, 203, 0.24);
+    }
+    .feature-card.alt-gold .pill,
+    .screen-card.alt-gold .pill {
+      background: var(--gold-soft);
+      color: #3e2b00;
+      border-color: rgba(255, 194, 92, 0.24);
+    }
+
+    .screen-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .support {
+      align-items: stretch;
+    }
+
+    .support-copy,
+    .support-card {
+      flex: 1 1 360px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 12px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .detail-list li {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .detail-list strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 0.92rem;
+    }
+
+    .detail-list a {
+      color: var(--brand-strong);
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    .footer { padding: 24px 0 48px; }
+    .footer-shell { padding: 22px 24px; }
+
+    @media (max-width: 1080px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .screen-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 720px) {
+      .hero-notes,
+      .mini-grid,
+      .screen-grid { grid-template-columns: 1fr; }
+
+      .actions,
+      .nav-links,
+      .footer-links { width: 100%; }
+
+      .button,
+      .nav-links a,
+      .footer-links a { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Lihenium Studio</h1>
-  <p>Official website for Lihenium apps.</p>
-  <p><a href="https://liheniumapp.github.io/privacy-policy/">Privacy Policy</a></p>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Lihenium: Scan PDF & Vault home">
+        <span class="brand-logo">
+          <img src="assets/logo.png" alt="Lihenium: Scan PDF & Vault app logo" />
+        </span>
+        <span class="brand-copy">
+          <strong>Lihenium: Scan PDF &amp; Vault</strong>
+          <span>Scan, secure, and manage documents</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#screens">Screens</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#support">Support</a>
+      </nav>
+
+      <div class="actions">
+        <a class="pill" href="https://liheniumapp.github.io/privacy-policy/" target="_blank" rel="noreferrer">Privacy Policy</a>
+        <a class="button primary" href="mailto:lihenium.app@gmail.com">Email Support</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section">
+      <div class="container hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Android document workspace</div>
+          <h1>Scan, organize, protect, and restore documents in one place.</h1>
+          <p class="lead">
+            Lihenium: Scan PDF &amp; Vault brings together document scanning, OCR, QR tools, PDF work, encrypted vault
+            storage, folder management, and backup options without turning the app into a mess.
+          </p>
+
+          <div class="actions">
+            <a class="button primary" href="mailto:lihenium.app@gmail.com">Contact Support</a>
+            <a class="button secondary" href="#screens">See the app screens</a>
+          </div>
+
+          <div class="hero-chips" style="margin-top: 22px;">
+            <span class="chip">Document scan</span>
+            <span class="chip">OCR and QR</span>
+            <span class="chip">PDF tools</span>
+            <span class="chip">Secure Vault</span>
+            <span class="chip">Google Drive backup</span>
+            <span class="chip">Passport Studio</span>
+          </div>
+
+          <div class="hero-notes">
+            <div class="note">
+              <strong>Cleaner daily workflow</strong>
+              <span class="muted">Jump from home to scan, import, folders, tools, recent activity, and vault without hunting around.</span>
+            </div>
+            <div class="note">
+              <strong>Privacy-minded by default</strong>
+              <span class="muted">Most document work stays on-device. Google sign-in is optional when you want backup and restore.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-shot">
+          <div class="phone">
+            <img src="assets/screen-home.jpg" alt="Lihenium home dashboard" />
+          </div>
+          <div class="mini-grid">
+            <div class="mini-card">
+              <strong>Quick access</strong>
+              <span>Scan documents, extract text, scan QR codes, and open passport tools from one dashboard.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Vault and backup</strong>
+              <span>Protect sensitive files, then restore or export when you actually need to move data.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">What the app covers</div>
+          <h2>Document tools, private storage, and backup in one app.</h2>
+          <p class="lead">
+            Scan pages, organize files, protect private documents, and restore backups when needed
+            without jumping between separate apps.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="pill">Capture and sort</span>
+            <strong>Go from quick scan to a structured library fast.</strong>
+            <p>Lihenium: Scan PDF &amp; Vault keeps scanned pages, imported PDFs, folders, and recent activity readable instead of burying everything inside one endless list.</p>
+          </article>
+
+          <article class="feature-card alt-teal">
+            <span class="pill">Protect sensitive files</span>
+            <strong>Vault features sit inside the app instead of feeling bolted on.</strong>
+            <p>Secure Vault handles private files, biometric access, and health checks so privacy and file management stay connected.</p>
+          </article>
+
+          <article class="feature-card alt-gold">
+            <span class="pill">Backup only when needed</span>
+            <strong>Cloud and local recovery options stay clear and simple.</strong>
+            <p>Use Google Drive backup when you want account-based restore, or export a local encrypted backup file when you prefer to stay in control.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="screens">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">App screens</div>
+          <h2>Explore the main screens of Lihenium.</h2>
+          <p class="lead">From scanning and folders to vault protection, backup, and passport tools, every screen stays focused and easy to understand.</p>
+        </div>
+
+        <div class="screen-grid">
+          <article class="screen-card">
+            <span class="pill">Dashboard</span>
+            <h3>Home overview</h3>
+            <p>Quick actions, recent activity, library access, vault entry, and tools in one place.</p>
+            <div class="phone"><img src="assets/screen-home.jpg" alt="Lihenium home dashboard" /></div>
+          </article>
+
+          <article class="screen-card">
+            <span class="pill">Scanner</span>
+            <h3>Scan workspace</h3>
+            <p>See scanned pages, imported PDFs, folders, and the scan action together.</p>
+            <div class="phone"><img src="assets/screen-scan.jpg" alt="Lihenium scan workspace" /></div>
+          </article>
+
+          <article class="screen-card alt-teal">
+            <span class="pill">Secure Vault</span>
+            <h3>Private file storage</h3>
+            <p>Protected images, docs, videos, and PDFs stay separate from the normal library.</p>
+            <div class="phone"><img src="assets/screen-vault.jpg" alt="Lihenium secure vault" /></div>
+          </article>
+
+          <article class="screen-card alt-teal">
+            <span class="pill">Vault status</span>
+            <h3>Vault health check</h3>
+            <p>Security score, passphrase state, recovery method, storage, and integrity checks.</p>
+            <div class="phone"><img src="assets/screen-vault-health.jpg" alt="Lihenium vault health dialog" /></div>
+          </article>
+
+          <article class="screen-card alt-teal">
+            <span class="pill">Backup</span>
+            <h3>Cloud and local restore</h3>
+            <p>Sign in for Google Drive backup or export an encrypted local backup file instead.</p>
+            <div class="phone"><img src="assets/screen-backup.jpg" alt="Lihenium backup and restore screen" /></div>
+          </article>
+
+          <article class="screen-card">
+            <span class="pill">Folders</span>
+            <h3>Nested folder tree</h3>
+            <p>Large projects stay organized with nested folders and named document spaces.</p>
+            <div class="phone"><img src="assets/screen-folders.jpg" alt="Lihenium folder tree" /></div>
+          </article>
+
+          <article class="screen-card">
+            <span class="pill">Activity view</span>
+            <h3>Activity tree</h3>
+            <p>Track scanner output, folders, and document areas from one browsable tree.</p>
+            <div class="phone"><img src="assets/screen-activity.jpg" alt="Lihenium activity tree" /></div>
+          </article>
+
+          <article class="screen-card alt-gold">
+            <span class="pill">Passport Studio</span>
+            <h3>Photo tools for ready-to-save passport layouts</h3>
+            <p>Switch country presets, adjust background options, pick layout counts, and export.</p>
+            <div class="phone"><img src="assets/screen-passport.jpg" alt="Lihenium passport studio" /></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="privacy">
+      <div class="container support">
+        <div class="support-copy">
+          <div class="eyebrow">Privacy and support</div>
+          <h2 style="margin-top: 16px; font-size: clamp(2rem, 3.2vw, 3rem); max-width: 12ch;">Privacy, terms, and support in one place.</h2>
+          <p style="margin-top: 16px;">
+            Find the official privacy policy, terms and conditions, and support email directly from the website.
+          </p>
+          <div class="hero-notes" style="margin-top: 24px;">
+            <div class="note">
+              <strong>Mostly on-device</strong>
+              <span class="muted">Most document handling stays on your device by default.</span>
+            </div>
+            <div class="note">
+              <strong>Optional sign-in</strong>
+              <span class="muted">Google sign-in is only needed for backup and restore flows.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="support-card" id="support">
+          <h3>Official links</h3>
+          <ul class="detail-list">
+            <li>
+              <strong>Support email</strong>
+              <a href="mailto:lihenium.app@gmail.com">lihenium.app@gmail.com</a>
+            </li>
+            <li>
+              <strong>App name</strong>
+              Lihenium: Scan PDF &amp; Vault
+            </li>
+            <li>
+              <strong>Privacy policy</strong>
+              <a href="https://liheniumapp.github.io/privacy-policy/" target="_blank" rel="noreferrer">https://liheniumapp.github.io/privacy-policy/</a>
+            </li>
+            <li>
+              <strong>Terms and conditions</strong>
+              <a href="https://liheniumapp.github.io/privacy-policy/terms.html" target="_blank" rel="noreferrer">https://liheniumapp.github.io/privacy-policy/terms.html</a>
+            </li>
+            <li>
+              <strong>Developer</strong>
+              Lihenium Studio
+            </li>
+          </ul>
+          <div class="actions" style="margin-top: 24px;">
+            <a class="button primary" href="mailto:lihenium.app@gmail.com">Email support</a>
+            <a class="button secondary" href="https://liheniumapp.github.io/privacy-policy/" target="_blank" rel="noreferrer">Open policy page</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-shell">
+        <div>
+          <strong>Lihenium: Scan PDF &amp; Vault</strong><br />
+          <span class="muted">Copyright <span id="year"></span> Lihenium Studio.</span>
+        </div>
+        <div class="footer-links">
+          <a href="#top">Back to top</a>
+          <a href="#screens">Screens</a>
+          <a href="https://liheniumapp.github.io/privacy-policy/" target="_blank" rel="noreferrer">Privacy</a>
+          <a href="mailto:lihenium.app@gmail.com">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
