@@ -136,16 +136,23 @@
       display: inline-flex;
       gap: 14px;
       align-items: center;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .brand-logo {
       width: 52px;
       height: 52px;
-      overflow: hidden;
       border-radius: 18px;
       background: #171635;
+      background-image: url("assets/logo.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       box-shadow: 0 12px 28px rgba(58, 45, 160, 0.18);
       flex-shrink: 0;
+      -webkit-user-drag: none;
+      pointer-events: none;
     }
 
     .brand-copy strong {
@@ -320,13 +327,11 @@
       font-size: clamp(1rem, 1.4vw, 1.14rem);
     }
 
-    .actions { margin-top: 26px; }
-
     .hero-notes {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
-      margin-top: 26px;
+      margin-top: 22px;
     }
 
     .note {
@@ -559,7 +564,6 @@
         line-height: 1.58;
       }
 
-      .hero .actions,
       .support-card .actions {
         display: grid;
         grid-template-columns: 1fr;
@@ -567,7 +571,6 @@
         gap: 10px;
       }
 
-      .hero .actions .button,
       .support-card .actions .button {
         width: 100%;
       }
@@ -659,15 +662,13 @@
         <span></span>
       </button>
 
-      <a class="brand" href="#top" aria-label="Lihenium: Scan PDF & Vault home">
-        <span class="brand-logo">
-          <img src="assets/logo.png" alt="Lihenium: Scan PDF & Vault app logo" />
-        </span>
+      <div class="brand" aria-label="Lihenium: Scan PDF & Vault">
+        <span class="brand-logo" aria-hidden="true"></span>
         <span class="brand-copy">
           <strong>Lihenium: Scan PDF &amp; Vault</strong>
           <span>Scan, secure, and manage documents</span>
         </span>
-      </a>
+      </div>
 
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#features">Features</a>
@@ -690,16 +691,10 @@
       <div class="container hero">
         <div class="hero-copy">
           <div class="eyebrow">Android document workspace</div>
-          <h1>Scan, organize, protect, and restore documents in one place.</h1>
+          <h1>Offline first. Backup optional.</h1>
           <p class="lead">
-            Lihenium: Scan PDF &amp; Vault brings together document scanning, OCR, QR tools, PDF work, encrypted vault
-            storage, folder management, and backup options without turning the app into a mess.
+            All your documents stay available offline, even without Wi-Fi. Backup and online restore stay optional and fully in your control.
           </p>
-
-          <div class="actions">
-            <a class="button primary" href="mailto:lihenium.app@gmail.com">Contact Support</a>
-            <a class="button secondary" href="#screens">See the app screens</a>
-          </div>
 
           <div class="hero-chips" style="margin-top: 22px;">
             <span class="chip">Document scan</span>
@@ -939,6 +934,15 @@
       if (window.innerWidth > 720) {
         closeMobileMenu();
       }
+    });
+
+    document.querySelectorAll(".brand, .brand-logo").forEach((element) => {
+      element.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+      });
+      element.addEventListener("dragstart", (event) => {
+        event.preventDefault();
+      });
     });
   </script>
 </body>
